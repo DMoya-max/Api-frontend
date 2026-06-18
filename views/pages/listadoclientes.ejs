@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <%- include('../partials/head'); %>
+</head>
+<body class="container">
+   <main>
+       <div class="jumbotron">
+         <h1>Listado de Clientes</h1>
+         <% if (clientes && clientes.length > 0) { %>
+             <table id="tablita" border="1" cellpadding="5" cellspacing="0" class="table table-striped">
+                 <thead>
+                     <tr>
+                         <th>Nombre</th>
+                         <th>Email</th>
+                         <th>Teléfono</th>
+                     </tr>
+                 </thead>
+                 <tbody>
+                     <% clientes.forEach(function(cliente) { %>
+                     <tr>
+                         <td><%= cliente.nombre %></td>
+                         <td><%= cliente.email %></td>
+                         <td><%= cliente.telefono || 'No registra' %></td>
+                     </tr>
+                     <% }); %>
+                 </tbody>
+             </table>
+         <% } else { %>
+             <p>No hay clientes registrados.</p>
+         <% } %>
+       </div>
+   </main>
+   <footer>
+       <%- include('../partials/footer'); %>
+   </footer>
+</body>
+</html>

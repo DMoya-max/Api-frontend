@@ -1,71 +1,58 @@
+
 const Cliente = require('../models/cliente.model');
 
-
-exports.consultar = async (req,res)=>{
+exports.home = async (req, res) => {
+  res.render('pages/index');
+};
+exports.obtenerClientes = async (req, res) => {
   try {
-    const clientes = await Cliente.find({});
-    console.log(clientes);
+    const clientes = await Cliente.find();
     res.json(clientes);
-  } catch (error) {
-    res.status(500).json({ error: error.message });
-  }
-}
-
-exports.consultarId = async (req,res)=>{
-  try {
-    const clientes = await Cliente.findOne({email:req.params.email});
-    console.log(clientes);
-    res.json(clientes);
-  } catch (error) {
-    res.status(500).json({ error: error.message });
-    }
-}
-
-exports.registrar = async (req, res)=>{
-
-    try {
-        let nuevo={
-            nombre:req.body.nombre,
-            email:req.body.email,
-            telefono:req.body.telefono,
-        }
-      
-        const clientes = await Cliente.create(nuevo);
-        res.json(clientes);
-
-    } catch (error) {   
-      res.status(500).json({ error: error.message });
-    }
-} 
-
-exports.actualizar = async (req, res) => {
-  try {
-    const actualizado = await Cliente.findOneAndUpdate(
-      { email: req.params.email },
-      req.body,
-      {new: true} // devuelve el cliente actualizado
-    );
-    res.json(actualizado);
   } catch (error) {
     res.status(500).json({ error: error.message });
   }
 };
 
-exports.eliminar = async (req, res) => {
+
+exports.crearCliente = async (req, res) => {
   try {
-    const eliminado = await Cliente.findOneAndDelete({ email: req.params.email });
-    res.json({ mensaje: 'Cliente eliminado', cliente: eliminado });
+    const nuevoCliente = new Cliente(req.body);
+    await nuevoCliente.save();
+    res.status(201).json(nuevoCliente);
+  } catch (error) {
+    res.status(400).json({ error: error.message });
+  }
+};
+
+
+exports.actualizarCliente = async (req, res) => {
+  try {
+    const clienteActualizado = await Cliente.findByIdAndUpdate(req.params.id, req.body, { new: true });
+    res.json(clienteActualizado);
+  } catch (error) {
+    res.status(400).json({ error: error.message });
+  }
+};
+
+
+exports.eliminarCliente = async (req, res) => {
+  try {
+    await Cliente.findByIdAndDelete(req.params.id);
+    res.json({ mensaje: "Cliente eliminado correctamente" });
   } catch (error) {
     res.status(500).json({ error: error.message });
   }
 };
 
-/**
- 
-en lugar de usar
-module.exports para exportar
-puede poner la palabra exports directamente en la funcion o variable
-que deseo exportar
 
-
-**/
+exports.vistaListadoClientes = async (req, res) => {
+  try {
+    const listado = await Cliente.find(); 
+    res.render('pages/listadoclientes', { clientes: listado });
+  } catch (error) {
+    res.status(500).send("Error al cargar la página de clientes: " + error.message);
+  }
+};
+exports.formulario = async (req, res) => {
+  res.render('pages/registrarcliente');
+}    marlonpalaciosmoreno7-afk
