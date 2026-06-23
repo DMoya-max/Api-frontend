@@ -1,36 +1,47 @@
 <!DOCTYPE html>
 <html lang="en">
- <head>
-   <%- include('../partials/head'); %>
+
+<head>
+  <%- include('../partials/head'); %>
 </head>
 
 <body>
 
-   <header>
-       <%- include('../partials/header'); %>
-   </header>
+  <header>
+    <%- include('../partials/header'); %>
+  </header>
 
 
-    <div class="container mt-3">
-  <h2>Registrar cliente</h2>
-  <form action="/api/v1/clientes" method="POST">
-    <div class="mb-3 mt-3">
-      <label for="nombre">Nombre:</label>
-      <input type="text" class="form-control" id="nombre" placeholder="Enter name" name="nombre">
-    </div>
-    <div class="mb-3 mt-3">
-      <label for="email">Email:</label>
-      <input type="email" class="form-control" id="email" placeholder="Enter email" name="email">
-    </div>
-    <div class="mb-3 mt-3">
-      <label for="tel">Tel:</label>
-      <input type="text" class="form-control" id="tel" placeholder="Enter phone" name="telefono">
-    </div>
-    <button type="submit" class="btn btn-primary">Submit</button>
-  </form>
-</div>
- <footer>
-       <%- include('../partials/footer'); %>
-   </footer>
+  <div class="container mt-3">
+    <h2>Registrar cliente</h2>
+    <form action="/api/v1/clientes" method="POST">
+      <div class="mb-3 mt-3">
+        <label for="nombre">Nombre:</label>
+        <input type="text" class="form-control" id="nombre" placeholder="Enter name" name="nombre">
+      </div>
+      <div class="mb-3 mt-3">
+        <label for="email">Email:</label>
+        <input type="email" class="form-control" id="email" placeholder="Enter email" name="email">
+      </div>
+      <div class="mb-3 mt-3">
+        <label for="tel">Tel:</label>
+        <input type="text" class="form-control" id="tel" placeholder="Enter phone" name="telefono">
+      </div>
+
+      <% if (locals.mensaje) { %>
+        <div class="alert alert-success mt-3" role="alert">
+          <%= mensaje %>
+        </div>
+        <% } %>
+
+          <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+  </div>
+
+
+  <footer>
+    <%- include('../partials/footer'); %>
+  </footer>
 </body>
+
 </html>

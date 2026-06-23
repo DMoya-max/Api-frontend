@@ -1,12 +1,20 @@
 const Servicio = require('../models/servicios.model');
 
+
 exports.obtenerServicios = async (req, res) => {
   try {
     const listado = await Servicio.find(); 
-    res.render('pages/listadoservicios', { servicios: listado }); 
+    // Pasamos tanto 'servicios' como 'mensaje' por seguridad para evitar ReferenceErrors
+    res.render('pages/listadoservicios', { servicios: listado, mensaje: null }); 
   } catch (error) {
     res.status(500).send("Error al cargar los servicios: " + error.message);
   }
+};
+
+
+
+exports.formularioServicio = async (req, res) => {
+  res.render('pages/formularioservicios', { mensaje: null });
 };
 
 exports.crearServicio = async (req, res) => {
@@ -14,13 +22,17 @@ exports.crearServicio = async (req, res) => {
     const nuevoServicio = new Servicio(req.body);
     await nuevoServicio.save();
     
-    // Redirige al listado para ver el nuevo servicio de inmediato
-    res.redirect('/servicios'); 
+ 
+    res.status(201).render('pages/formularioservicios', { 
+      mensaje: 'Servicio creado correctamente', 
+      servicios: nuevoServicio 
+    }); 
   } catch (error) {
-    res.status(400).json({ error: error.message });
+    res.status(400).render('pages/formularioservicios', { 
+      mensaje: "Error al guardar: " + error.message 
+    });
   }
 };
-
 
 exports.insertarDatosIniciales = async (req, res) => {
   try {
@@ -52,7 +64,6 @@ exports.actualizarServicio = async (req, res) => {
     res.status(400).json({ error: error.message });
   }
 };
-
 
 exports.eliminarServicio = async (req, res) => {
   try {

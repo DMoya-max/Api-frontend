@@ -6,9 +6,8 @@ exports.home = async (req, res) => {
 };
 
 exports.formulario = async (req, res) => {
-  res.render('pages/registrarcliente');
+  res.render('pages/registrarcliente', { mensaje: null});
 }
-
 
 
 exports.obtenerClientes = async (req, res) => {
