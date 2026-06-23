@@ -2,7 +2,9 @@ require('dotenv').config();
 const crypto = require('crypto');
 global.crypto = crypto;
 const express = require('express');
+
 const conectarDB = require('./config/connectiondb');
+
 
 
 const clienteController = require('./controllers/cliente.controller');
@@ -10,8 +12,10 @@ const servicioController = require('./controllers/servicios.controller');
 
 const app = express();
 
-app.set('view engine', 'ejs');
+const enrutador = require('./router/cliente.router');
 
+app.set('view engine', 'ejs');
+app.use('api/v1', enrutador);
 
 app.use(express.json());
 
