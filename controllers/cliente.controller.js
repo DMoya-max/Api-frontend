@@ -4,6 +4,11 @@ const Cliente = require('../models/cliente.model');
 exports.home = async (req, res) => {
   res.render('pages/index');
 };
+
+exports.formulario = async (req, res) => {
+  res.render('pages/registrarcliente');
+}
+
 exports.obtenerClientes = async (req, res) => {
   try {
     const clientes = await Cliente.find();
@@ -18,7 +23,7 @@ exports.crearCliente = async (req, res) => {
   try {
     const nuevoCliente = new Cliente(req.body);
     await nuevoCliente.save();
-    res.status(201).json(nuevoCliente);
+    res.status(201).render(nuevoCliente);
   } catch (error) {
     res.status(400).json({ error: error.message });
   }

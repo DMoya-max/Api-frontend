@@ -23,6 +23,8 @@ conectarDB();
 app.get('/', (req, res) => {
   res.render('pages/index');
 });
+
+app.get('/home', clienteController.home);
 app.get('/formulario', clienteController.formulario)
 
 app.get('/clientes', clienteController.obtenerClientes);
@@ -34,5 +36,5 @@ app.get('/listadoclientes', clienteController.vistaListadoClientes);
 
 const PORT = process.env.PORT || 8000;
 app.listen(PORT, () => {
-  console.log(`Servidor corriendo en el puerto http://localhost:${PORT}/listadoclientes`);
+  console.log(`Servidor corriendo en el puerto http://localhost:${PORT}/`);
 });
