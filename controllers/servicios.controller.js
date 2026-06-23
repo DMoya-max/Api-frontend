@@ -1,21 +1,21 @@
 const Servicio = require('../models/servicios.model');
 
-
 exports.obtenerServicios = async (req, res) => {
   try {
-    const servicios = await Servicio.find();
-    res.json(servicios);
+    const listado = await Servicio.find(); 
+    res.render('pages/listadoservicios', { servicios: listado }); 
   } catch (error) {
-    res.status(500).json({ error: error.message });
+    res.status(500).send("Error al cargar los servicios: " + error.message);
   }
 };
-
 
 exports.crearServicio = async (req, res) => {
   try {
     const nuevoServicio = new Servicio(req.body);
     await nuevoServicio.save();
-    res.status(201).json(nuevoServicio);
+    
+    // Redirige al listado para ver el nuevo servicio de inmediato
+    res.redirect('/servicios'); 
   } catch (error) {
     res.status(400).json({ error: error.message });
   }
@@ -52,6 +52,7 @@ exports.actualizarServicio = async (req, res) => {
     res.status(400).json({ error: error.message });
   }
 };
+
 
 exports.eliminarServicio = async (req, res) => {
   try {

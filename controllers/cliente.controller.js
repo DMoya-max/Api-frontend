@@ -9,10 +9,12 @@ exports.formulario = async (req, res) => {
   res.render('pages/registrarcliente');
 }
 
+
+
 exports.obtenerClientes = async (req, res) => {
   try {
-    const clientes = await Cliente.find();
-    res.json(clientes);
+    const listado = await Cliente.find();
+    res.render('pages/listadoclientes', { clientes: listado }); 
   } catch (error) {
     res.status(500).json({ error: error.message });
   }
@@ -23,7 +25,7 @@ exports.crearCliente = async (req, res) => {
   try {
     const nuevoCliente = new Cliente(req.body);
     await nuevoCliente.save();
-    res.status(201).render(nuevoCliente);
+    res.status(201).render('pages/registrarcliente', { mensaje: 'Cliente creado', cliente: nuevoCliente }); 
   } catch (error) {
     res.status(400).json({ error: error.message });
   }
@@ -50,7 +52,7 @@ exports.eliminarCliente = async (req, res) => {
 };
 
 
-exports.vistaListadoClientes = async (req, res) => {
+exports.listadoclientes = async (req, res) => {
   try {
     const listado = await Cliente.find(); 
     res.render('pages/listadoclientes', { clientes: listado });

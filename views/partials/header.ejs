@@ -1,7 +1,7 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
 <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
  <div class="container-fluid">
-  <a class="navbar-brand" href="/home"><i class="bi bi-github"></i></a>
+  <a class="navbar-brand" href="/api/v1/home"><i class="bi bi-github"></i></a>
    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#collapsibleNavbar">
      <span class="navbar-toggler-icon"></span>
    </button>
@@ -10,11 +10,22 @@
        <li class="nav-item dropdown">
          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">Clientes</a>
          <ul class="dropdown-menu">
-           <li><a class="dropdown-item" href="/formulario">Registrar</a></li>
-           <li><a class="dropdown-item" href="/listadoclientes">Listar</a></li>
+           <li><a class="dropdown-item" href="/api/v1/formulario">Registrar</a></li>
+           <li><a class="dropdown-item" href="/api/v1/listadoclientes">Listar</a></li>
          </ul>
        </li>
+
+
+       <li class="nav-item dropdown">
+         <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">Servicios</a>
+         <ul class="dropdown-menu">
+           <li><a class="dropdown-item" href="/api/v1/formularioservicios">Registrar Servicios </a></li>
+           <li><a class="dropdown-item" href="/api/v1/servicios">Ver servicios </a></li>
+         </ul>
+       </li>
+
      </ul>
    </div>
  </div>
 </nav>
+

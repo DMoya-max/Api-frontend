@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <%- include('../partials/head'); %>
+</head>
+
+<body>
+
+    <header>
+        <%- include('../partials/header'); %>
+    </header>
+
+
+    <div class="container mt-3">
+        <h2>Registrar Servicio</h2>
+
+        <form action="/api/v1/servicios" method="POST">
+            <div class="mb-3 mt-3">
+                <label for="nombre">Nombre del Servicio:</label>
+                <input type="text" class="form-control" id="nombre" placeholder="Ej. Corte de cabello" name="nombre"
+                    required>
+            </div>
+
+            <div class="mb-3 mt-3">
+                <label for="descripcion">Descripción:</label>
+                <input type="text" class="form-control" id="descripcion" placeholder="Ingrese una descripción corta"
+                    name="descripcion">
+            </div>
+
+            <div class="mb-3 mt-3">
+                <label for="duracionMinutos">Duración (Minutos):</label>
+                <input type="number" class="form-control" id="duracionMinutos" placeholder="Ej. 30"
+                    name="duracionMinutos">
+            </div>
+
+            <div class="mb-3 mt-3">
+                <label for="precio">Precio ($):</label>
+                <input type="number" class="form-control" id="precio" placeholder="Ej. 15000" name="precio">
+            </div>
+
+            <button type="submit" class="btn btn-primary">Guardar Servicio</button>
+        </form>
+    </div>
+    <footer>
+        <%- include('../partials/footer'); %>
+    </footer>
+</body>
+
+</html>

@@ -7,32 +7,35 @@
 
 <body class="container">
     <header>
-    <%- include('../partials/header'); %>
-</header>
+        <%- include('../partials/header'); %>
+    </header>
     <main>
         <div class="jumbotron">
-            <h1>Listado de Clientes</h1>
-            <% if (clientes && clientes.length> 0) { %>
+            <h1>Listado de Servicios</h1>
+            <% if (servicios && servicios.length> 0) { %>
                 <table id="tablita" border="1" cellpadding="5" cellspacing="0" class="table table-striped">
                     <thead>
                         <tr>
                             <th>Nombre</th>
-                            <th>Email</th>
-                            <th>Teléfono</th>
+                            <th>Descripcion</th>
+                            <th>Duracion Minutos</th>
+                            <th>Precio</th>
                             <th>Acciones</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <% clientes.forEach(function(cliente) { %>
+                        <% servicios.forEach(function(servicio) { %>
                             <tr>
                                 <td>
-                                    <%= cliente.nombre %>
+                                    <%= servicio.nombre %>
                                 </td>
                                 <td>
-                                    <%= cliente.email %>
+                                    <%= servicio.descripcion %>
                                 </td>
                                 <td>
-                                    <%= cliente.telefono || 'No registra' %>
+                                    <%= servicio.duracionMinutos || servicio.duracion || 'N/A' %>
+                                </td>
+                                <td>$<%= servicio.precio %>
                                 </td>
                                 <td>
                                     <button type="button" class="btn btn-outline-primary"> Ver detalles </button>
@@ -44,7 +47,7 @@
                     </tbody>
                 </table>
                 <% } else { %>
-                    <p>No hay clientes registrados.</p>
+                    <p>No hay servicios registrados.</p>
                     <% } %>
         </div>
     </main>
