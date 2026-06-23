@@ -35,6 +35,8 @@ app.get('/listadoclientes', clienteController.vistaListadoClientes);
 
 
 const PORT = process.env.PORT || 8000;
-app.listen(PORT, () => {
-  console.log(`Servidor corriendo en el puerto http://localhost:${PORT}/`);
+
+// Agregamos '0.0.0.0' como segundo argumento
+app.listen(PORT, '0.0.0.0', () => {
+  console.log(`Servidor corriendo en el puerto ${PORT}`);
 });
