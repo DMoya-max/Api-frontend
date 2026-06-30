@@ -15,12 +15,12 @@
     <div class="container mt-3">
         <h2>Registrar Servicio</h2>
 
-        <form action="/api/v1/servicios" method="POST">
+        <form action="/api/v1/formularioservicios" method="POST">
             <div class="mb-3 mt-3">
                 <label for="nombre">Nombre del Servicio:</label>
                 <input type="text" class="form-control" id="nombre" placeholder="Ej. Corte de cabello" name="nombre"
                     required>
-            </div>
+            </div> const { id, nombre, email, telefono } = req.body
 
             <div class="mb-3 mt-3">
                 <label for="descripcion">Descripción:</label>

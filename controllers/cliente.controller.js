@@ -30,26 +30,30 @@ exports.crearCliente = async (req, res) => {
   }
 };
 
-
 exports.actualizarCliente = async (req, res) => {
   try {
-    const clienteActualizado = await Cliente.findByIdAndUpdate(req.params.id, req.body, { new: true });
-    res.json(clienteActualizado);
+    const { id, nombre, email, telefono } = req.body;
+
+    await Cliente.findByIdAndUpdate(
+      id,
+      { nombre, email, telefono },
+      { new: true }
+    );
+
+    res.redirect('/api/v1/listadoclientes');
   } catch (error) {
-    res.status(400).json({ error: error.message });
+    res.status(400).send(error.message);
   }
 };
-
 
 exports.eliminarCliente = async (req, res) => {
-  try {
-    await Cliente.findByIdAndDelete(req.params.id);
-    res.json({ mensaje: "Cliente eliminado correctamente" });
-  } catch (error) {
-    res.status(500).json({ error: error.message });
-  }
+    try {
+        await Cliente.findByIdAndDelete(req.body.id);
+        res.redirect('/api/v1/listadoclientes');
+    } catch (error) {
+        res.status(400).send(error.message);
+    }
 };
-
 
 exports.listadoclientes = async (req, res) => {
   try {

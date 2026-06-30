@@ -1,8 +1,8 @@
 require('dotenv').config();
-const crypto = require('crypto');
-global.crypto = crypto;
 const express = require('express');
+const path = require('path');
 const conectarDB = require('./config/connectiondb');
+const methodOverride = require('method-override');
 
 
 const clienteController = require('./controllers/cliente.controller');
@@ -11,10 +11,15 @@ const servicioController = require('./controllers/servicios.controller');
 const app = express();
 
 const enrutador = require('./router/cliente.router');
+const servicioRouter = require('./router/servicios.router');
+app.use(methodOverride('_method'));
+
 
 app.set('view engine', 'ejs');
 app.use(express.urlencoded({ extended: true }));
+app.use(express.static(path.join(__dirname, 'public')));
 app.use('/api/v1', enrutador);
+app.use('/api/v1', servicioRouter);
 
 
 app.use(express.json());
@@ -30,14 +35,14 @@ app.get('/formularioservicios', (req, res) => {
 });
 
 app.get('/home', clienteController.home);
-app.get('/formulario', clienteController.formulario)
+app.get('/formulario', clienteController.formulario);
 app.get('/clientes', clienteController.obtenerClientes);
 app.post('/clientes', clienteController.crearCliente);
+app.get('/formularioservicio', servicioController.formularioServicio);
 app.get('/servicios', servicioController.obtenerServicios);
 app.post('/servicios', servicioController.crearServicio);
 app.post('/servicios/seed', servicioController.insertarDatosIniciales);
 app.get('/listadoclientes', clienteController.listadoclientes);
-
 
 const PORT = process.env.PORT || 8000;
 
